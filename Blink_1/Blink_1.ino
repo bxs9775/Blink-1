@@ -1,7 +1,7 @@
 //pin to recieve input from the photosensor
 int analogInPin = A5;
 //pin to recieve input from the switch
-int digitalInPin = 7;
+int digitalInPin = 2;
 //two pins for sending output to the LEDs
 int ledDispPin1 = 3;
 int ledDispPin2 = 11;
@@ -40,10 +40,10 @@ void loop() {
     anOut2 = 255 - anOut1;
   }
 
-  Serial.print("Out 1: ");
-  Serial.print(anOut1);
-  Serial.print(", Out 2: ");
-  Serial.println(anOut2);
+  //Serial.print("Out 1: ");
+  //Serial.print(anOut1);
+  //Serial.print(", Out 2: ");
+  //Serial.println(anOut2);
   
   //Sending values as output
   analogWrite(ledDispPin1,anOut1);
