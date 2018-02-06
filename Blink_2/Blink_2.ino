@@ -5,6 +5,12 @@ int digitalInPin = 2;
 //pins for sending output to the LEDs
 int ledDispPins[] = {11,9,5,3};
 
+//output storage
+int nextOut1[] = {0,0,0,0};
+int nextOut2[] = {0,0,0,0};
+int nextOut3[] = {0,0,0,0};
+int currOut[] = {0,0,0,0};
+
 //runs once and sets up the program
 void setup() {
   // sets up pins
@@ -24,17 +30,20 @@ void loop() {
 
   //output processing
   int tempInVal = 0;
-  int outVal = 0;
   for(int i = 0; i < 4; i++){
+    currOut[i] = nextOut3[i];
+    nextOut3[i] = nextOut2[i];
+    nextOut2[i] = nextOut1[i];
+    
     tempInVal = analogRead(analogInPins[i]);
-    outVal = map(tempInVal, 0, 1023, 0, 255);
+    nextOut1[i] = map(tempInVal, 0, 1023, 0, 255);
     if (switchState == 1)
     {
-      outVal = 255 - outVal;
+      nextOut1[i] = 255 - nextOut1[i];
     }
-    analogWrite(ledDispPins[i],outVal);
+    analogWrite(ledDispPins[i],currOut[i]);
   }
 
   //Add a short delay
-  delay(5);
+  delay(15);
 }
